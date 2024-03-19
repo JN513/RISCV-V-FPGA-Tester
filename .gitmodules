@@ -1,3 +1,6 @@
 [submodule "Risco-5"]
 	path = Risco-5
 	url = https://github.com/JN513/Risco-5
+[submodule "riscv-isa-ci-tests"]
+	path = riscv-isa-ci-tests
+	url = https://github.com/LSC-Unicamp/riscv-isa-ci-tests.git
