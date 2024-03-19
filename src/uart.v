@@ -2,7 +2,7 @@ module UART #(
     parameter CLOCK_FREQ = 25000000,
     parameter BIT_RATE =   115200,
     parameter PAYLOAD_BITS = 8,
-    parameter BUFFER_SIZE = 8
+    parameter BUFFER_SIZE = 16
 ) (
     input wire clk,
     input wire reset,

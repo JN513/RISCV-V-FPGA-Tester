@@ -17,7 +17,7 @@ assign led[0] = ~led_1;
 wire reset_o, option_memory, uart_full, finish_execution,
     enable_clk, core_clk, reset_core, reset_bus, uart_write;
 wire [1:0] memory_option, core_memory_option;
-wire [3:0] memory_page_number;
+wire [5:0] memory_page_number;
 wire [7:0] uart_data;
 
 wire memory_read, memory_write, core_read, core_write,
@@ -39,7 +39,7 @@ ResetBootSystem #(
 
 Controller_Test #(
     .CLOCK_FEQ(25000000),
-    .NUM_PAGES(13),
+    .NUM_PAGES(17),
     .MEMORY_FILE("src/reference.hex")
 ) Controller_Test (
     .clk(clk),
