@@ -3,7 +3,7 @@ module BUS (
     input wire clk,
     input wire reset,
     input wire option, // 0 master - 1 core
-    input wire [5:0] memory_page_number,
+    input wire [7:0] memory_page_number,
     output reg finish,
 
     // master connection
@@ -28,7 +28,7 @@ module BUS (
     output wire [31:0] memory_write_data
 );
 
-assign memory_address = (option == 1'b1) ? {20'h00000, memory_page_number, core_address[5:0]}: {20'h00000, memory_page_number, address[5:0]};
+assign memory_address = (option == 1'b1) ? {18'h00000, memory_page_number, core_address[5:0]}: {18'h00000, memory_page_number, address[5:0]};
 assign memory_read = (option == 1'b1) ? core_read : read ;
 assign memory_write = (option == 1'b1) ? core_write : write ;
 assign memory_write_data = (option == 1'b1) ? core_write_data : write_data ;

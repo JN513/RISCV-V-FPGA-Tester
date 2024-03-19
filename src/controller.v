@@ -13,13 +13,14 @@ module Controller_Test #(
     output reg reset_bus,
     output reg uart_write,
     output reg memory_read,
-    output reg [5:0] memory_page_number,
+    output reg [7:0] memory_page_number,
     output reg [7:0] uart_data,
     output wire [31:0] address,
     input wire [31:0] read_data
 );
 
 localparam TIMEOUT_CLK_CYCLES = 'd360;
+localparam DELAY_CYCLES = 'd30;
 localparam RESET_CLK_CYCLES = 'd20;
 
 localparam INIT = 4'b0000;
@@ -32,7 +33,7 @@ localparam READ_MEMORY_WB = 4'b0110;
 localparam CHECK = 4'b0111;
 localparam SEND_RESULT = 4'b1000;
 localparam DELAY = 4'b1001;
-localparam SEND_END_LINE = 4'b1010;
+localparam SEND_PAGE_NUMBER = 4'b1010;
 localparam UPDATE_PAGE = 4'b1011;
 localparam STOP = 4'b1100;
 
@@ -134,9 +135,9 @@ always @(posedge clk ) begin
 
             SEND_RESULT: begin
                 if(uart_full == 1'b0) begin
-                    uart_data <= {1'b0, (result & timeout_n), memory_page_number};
+                    uart_data <= {1'b0, (result & timeout_n), result, timeout_n, 4'h0};
                     uart_write <= 1'b1;
-                    state <= UPDATE_PAGE; 
+                    state <= DELAY; 
                 end else begin
                    state <= SEND_RESULT; 
                 end
@@ -144,21 +145,20 @@ always @(posedge clk ) begin
 
             DELAY: begin
                 uart_write <= 1'b0;
-                if(counter == TIMEOUT_CLK_CYCLES) begin
-                    state <= UPDATE_PAGE;
+                if(counter == DELAY_CYCLES) begin
+                    state <= SEND_PAGE_NUMBER;
                 end else begin
                     counter <= counter + 1'b1;
                 end
             end
 
-            SEND_END_LINE: begin
+            SEND_PAGE_NUMBER: begin
                 if(uart_full == 1'b0) begin
-                    //uart_data <= 8'b00001010;
-                    //uart_data <= 8'b01001001;
+                    uart_data <= memory_page_number;
                     uart_write <= 1'b1;
                     state <= UPDATE_PAGE; 
                 end else begin
-                   state <= SEND_END_LINE; 
+                   state <= SEND_PAGE_NUMBER; 
                 end
             end
 
