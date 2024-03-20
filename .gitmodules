@@ -4,3 +4,9 @@
 [submodule "riscv-isa-ci-tests"]
 	path = riscv-isa-ci-tests
 	url = https://github.com/LSC-Unicamp/riscv-isa-ci-tests.git
+[submodule "riscv-steel"]
+	path = riscv-steel
+	url = https://github.com/riscv-steel/riscv-steel.git
+[submodule "darkriscv"]
+	path = darkriscv
+	url = https://github.com/JN513/darkriscv.git

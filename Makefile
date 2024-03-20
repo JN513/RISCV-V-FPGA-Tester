@@ -1,3 +1,5 @@
+# read_verilog Risco-5/src/core/*.v;
+# read_verilog riscv-steel/hardware/core/rvsteel_core.v;
 
 all: ./build/out.bit
 
