@@ -185,49 +185,4 @@ always @(posedge clk ) begin
     end
 end
 
-/*
-always @(*) begin
-    case (state)
-        START_CORE: begin
-            timeout_n <= 1'b1;
-            counter <= 'd0;
-            option_memory <= 1'b1;
-            enable_clk <= 1'b1;
-        end
-
-        STOP_CORE: begin
-            option_memory <= 1'b0;
-            enable_clk <= 1'b0;
-        end
-
-        READ_MEMORY: begin
-            memory_read <= 1'b1;
-        end
-
-        READ_MEMORY_WB: begin
-            memory_data <= read_data;
-            memory_read <= 1'b0;
-        end
-
-        CHECK: begin
-            result <= (memory_data == reference_memory[memory_page_number]) ? 1'b1 : 1'b0;
-        end
-
-        DELAY: begin
-            uart_write <= 1'b0;
-        end
-
-        UPDATE_PAGE: begin
-            uart_write <= 1'b0;
-            memory_page_number <= memory_page_number + 1'b1;
-        end
-        default: begin
-            //timeout_n <= 1'b0;
-            result <= 1'b0;
-            enable_clk <= 1'b0;
-        end
-    endcase
-end
-*/
-
 endmodule

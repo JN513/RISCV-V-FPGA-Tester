@@ -31,7 +31,7 @@ ResetBootSystem #(
 
 Controller_Test #(
     .CLOCK_FEQ(25000000),
-    .NUM_PAGES(18),
+    .NUM_PAGES(46),
     .MEMORY_FILE("src/reference.hex")
 ) Controller_Test (
     .clk(clk),
